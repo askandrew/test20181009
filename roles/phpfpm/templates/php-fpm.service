@@ -1,0 +1,14 @@
+[Unit]
+Description=PHP FastCGI Server
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/run/php-fpm.pid
+ExecStart=/usr/sbin/php-fpm --fpm-config /etc/php5/fpm/php-fpm.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

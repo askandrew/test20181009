@@ -1,0 +1,30 @@
+---
+# tasks file for php-fpm
+
+- name: Install php-fpm and deps
+  yum: name={{ item }} state=present
+  become: yes
+  with_items:
+    - php
+    - php-fpm
+    - php-enchant
+    - php-IDNA_Convert
+    - php-mbstring
+    - php-mysql
+    - php-PHPMailer
+    - php-process
+    - php-xml
+
+- name: Copy php-fpm configuration
+  template: src=php-fpm.service dest=/etc/systemd/system/
+  become: yes
+
+- name: Disable default pool
+  command: mv /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.disabled creates=/etc/php-fpm.d/www.disabled
+  notify: restart php-fpm
+  become: yes
+
+- name: Copy php-fpm configuration
+  template: src=helloworld.conf dest=/etc/php-fpm.d/
+  notify: restart php-fpm
+  become: yes

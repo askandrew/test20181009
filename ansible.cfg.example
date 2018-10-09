@@ -1,0 +1,4 @@
+[defaults]
+roles_path = /your/roles/directory
+transport = ssh
+host_key_checking = False

@@ -1,0 +1,11 @@
+---
+- name: Deploy Service HelloWorld
+  hosts: all
+  remote_user: deployer
+
+  roles:
+    - basic
+    - mariadb
+    - nginx
+    - phpfpm
+    - helloworld

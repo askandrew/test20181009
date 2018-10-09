@@ -1,0 +1,2 @@
+[helloworld]
+helloworld-01 ansible_host=xx.xx.xx.xx ansible_ssh_user=deployer
